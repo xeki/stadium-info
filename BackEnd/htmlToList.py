@@ -38,7 +38,7 @@ def get_stadium_details(stadium_url):
 			result[t.text]=data[i].text
 		else:
 			result[t.text]=""
-	result["Temp"] = get_weather(result["Osoite"].split(",")[-1])	
+	result["Temp"] = get_weather(result["Osoite"].split(" ")[-1])	
 	return json.dumps(result,ensure_ascii=False)
 	
 def get_weather(address):
