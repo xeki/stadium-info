@@ -33,20 +33,23 @@ def get_stadium_details(stadium_url):
 	titels = details.find_all("dt")
 	data = details.find_all("dd")
 	result["desc"]= divs.find_all("p")[0].text
-	
 	for i, t in enumerate(titels):
 		if i<len(data):
 			result[t.text]=data[i].text
 		else:
 			result[t.text]=""
-		
+	result["Temp"] = get_weather(result["Osoite"].split(",")[-1])	
 	return json.dumps(result,ensure_ascii=False)
 	
 def get_weather(address):
-	r = requests.get("http://api.openweathermap.org/data/2.5/weather?q="+address+"&APPID=9d52bdcae38750ba99d2befd8dc42942&&units=metric")
-	formatted_r = r.json()
-	temp = formatted_r["main"]["temp"]
-	print(r.json(),temp)
+	try:
+		r = requests.get("http://api.openweathermap.org/data/2.5/weather?q="+address+"&APPID=9d52bdcae38750ba99d2befd8dc42942&&units=metric")
+		formatted_r = r.json()
+		temp = formatted_r["main"]["temp"]
+		#print(r.json(),temp)
+		return temp
+	except:
+		return ""
 	
 	
 
