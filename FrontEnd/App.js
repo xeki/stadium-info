@@ -22,7 +22,7 @@ getStadiums(event){
 	}  
 	console.log("done"+new Date());
 }).catch(e=>{console.log(e);
-	this.setState({stadiums:[],inputText:"",details:"",error:e}); 
+	this.setState({stadiums:[],inputText:"",details:"",error:" Error in getting stadium list"}); 
 	});
 }
 
@@ -65,7 +65,7 @@ getStadiumDetails(event){
 	fetch("http://localhost:8080/detail?url="+path).then(res=>res.json()).then(data=>{
 		console.log(data);
 		this.setState({details:data,stadiums:[],inputText:"",error:""})
-		}).catch(e=>this.setState({details:"",stadiums:[],inputText:"","error":e})); 
+		}).catch(e=>this.setState({details:"",stadiums:[],inputText:"","error":"Error in getting stadium detail"})); 
 }
   render() {
     return (
